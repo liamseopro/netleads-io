@@ -1,0 +1,344 @@
+/* ============================================================
+   NET LEADS — CREATIVES LIBRARY
+   Image-free, on-brand generative graphics (CSS + SVG).
+   Theme: connections / signal / marketing-momentum.
+   Drop-in: <div class="creative" data-creative="spectrum"></div>
+   Hydrated by creatives.js. All scale to fill their container.
+   Electric Blue #1E6FFF → Cyan #22D3EE on Ink #0F0F10.
+   ============================================================ */
+
+.creative {
+  --c1: var(--orange, #1E6FFF);
+  --c2: var(--amber, #22D3EE);
+  --cr-bg: var(--ink, #0F0F10);
+  --cr-line: rgba(255, 255, 255, .10);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  overflow: hidden;
+  background: var(--cr-bg);
+  isolation: isolate;
+}
+.creative * { box-sizing: border-box; }
+
+/* light surface variant */
+.creative--paper {
+  --cr-bg: var(--paper, #FBF8F3);
+  --cr-line: rgba(22, 19, 15, .10);
+}
+
+/* a soft brand vignette many creatives sit on */
+.creative--glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 60% at 50% 42%, rgba(246, 169, 59, .20), transparent 70%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* optional caption chip */
+.creative .cr-cap {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  z-index: 5;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: rgba(255, 255, 255, .55);
+  text-transform: uppercase;
+}
+.creative--paper .cr-cap { color: rgba(22, 19, 15, .5); }
+
+@media (prefers-reduced-motion: reduce) {
+  .creative * { animation: none !important; }
+}
+
+/* ============================================================
+   1 · SPECTRUM — equalizer analyzer, bars pulse from CENTER
+   ============================================================ */
+.cr-spectrum {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4%;
+  padding: 16% 7%;
+}
+.cr-spectrum .cr-bar {
+  flex: 1 1 0;
+  height: 100%;
+  border-radius: 999px;
+  transform-origin: center center;      /* << pulses from the middle */
+  background: linear-gradient(180deg, var(--c2), var(--c1));
+  opacity: .92;
+  animation: crSpectrum 1.15s ease-in-out infinite alternate;
+}
+@keyframes crSpectrum {
+  from { transform: scaleY(.16); }
+  to   { transform: scaleY(1);   }
+}
+
+/* ============================================================
+   2 · WAVE — oscilloscope / waveform lines
+   ============================================================ */
+.cr-wave { position: absolute; inset: 0; }
+.cr-wave svg { width: 200%; height: 100%; display: block; }
+.cr-wave .cr-wpath {
+  fill: none;
+  stroke-linecap: round;
+  animation: crWaveShift 7s linear infinite;
+}
+.cr-wave .cr-wpath--1 { stroke: var(--c1); stroke-width: 3;   opacity: .9;  animation-duration: 6s; }
+.cr-wave .cr-wpath--2 { stroke: var(--c2); stroke-width: 2.2; opacity: .6;  animation-duration: 9s; }
+.cr-wave .cr-wpath--3 { stroke: rgba(255,255,255,.35); stroke-width: 1.4; animation-duration: 12s; }
+@keyframes crWaveShift { to { transform: translateX(-50%); } }
+.cr-wave .cr-scan {
+  position: absolute; top: 0; bottom: 0; width: 2px; left: 50%;
+  background: linear-gradient(180deg, transparent, var(--c2), transparent);
+  box-shadow: 0 0 18px 2px var(--c2);
+  animation: crScan 4.5s ease-in-out infinite;
+}
+@keyframes crScan { 0%,100% { left: 8%; } 50% { left: 92%; } }
+
+/* ============================================================
+   3 · RINGS — sonar / signal ripple
+   ============================================================ */
+.cr-rings { position: absolute; inset: 0; display: grid; place-items: center; }
+.cr-rings .cr-ring {
+  position: absolute;
+  width: 22%; aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--c1);
+  animation: crRing 3.6s cubic-bezier(.2,.6,.2,1) infinite;
+}
+@keyframes crRing {
+  0%   { transform: scale(.3); opacity: 0; border-color: var(--c2); }
+  12%  { opacity: .9; }
+  100% { transform: scale(4.2); opacity: 0; border-color: var(--c1); }
+}
+.cr-rings .cr-core {
+  position: absolute; width: 12%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, var(--c2), var(--c1));
+  box-shadow: 0 0 30px 4px rgba(34,211,238,.55);
+  animation: crCorePulse 1.8s ease-in-out infinite;
+}
+@keyframes crCorePulse { 0%,100% { transform: scale(.82); } 50% { transform: scale(1.08); } }
+
+/* ============================================================
+   4 · MATRIX — frequency dot grid, brightness sweeps across
+   ============================================================ */
+.cr-matrix {
+  position: absolute; inset: 0;
+  display: grid;
+  gap: 0;
+  padding: 9%;
+  place-items: center;
+}
+.cr-matrix .cr-dot {
+  width: 38%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--c1);
+  transform: scale(.45);
+  opacity: .22;
+  animation: crDot 2.6s ease-in-out infinite;
+}
+@keyframes crDot {
+  0%, 100% { transform: scale(.4);  opacity: .18; }
+  50%      { transform: scale(1);   opacity: 1; background: var(--c2); }
+}
+
+/* ============================================================
+   5 · VINYL — spinning record
+   ============================================================ */
+.cr-vinyl { position: absolute; inset: 0; display: grid; place-items: center; }
+.cr-vinyl .cr-disc {
+  width: 72%; aspect-ratio: 1; border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at center,
+      rgba(255,255,255,.05) 0 2px, transparent 2px 6px),
+    radial-gradient(circle at 38% 34%, rgba(255,255,255,.14), transparent 30%),
+    #141416;
+  box-shadow: inset 0 0 60px rgba(0,0,0,.6), 0 24px 50px -20px rgba(0,0,0,.7);
+  display: grid; place-items: center;
+  animation: crSpin 7s linear infinite;
+}
+.cr-vinyl .cr-label {
+  width: 34%; aspect-ratio: 1; border-radius: 50%;
+  background: conic-gradient(var(--c1), var(--c2), var(--c1));
+  display: grid; place-items: center;
+}
+.cr-vinyl .cr-label::after {
+  content: ""; width: 16%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--cr-bg);
+}
+@keyframes crSpin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   6 · NODES — connected network / AI graph
+   ============================================================ */
+.cr-nodes { position: absolute; inset: 0; }
+.cr-nodes svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cr-nodes .cr-link { stroke: var(--cr-line); stroke-width: 1; }
+.cr-nodes .cr-link.is-live {
+  stroke: var(--c2);
+  stroke-dasharray: 5 7;
+  animation: crDash 1.6s linear infinite;
+}
+@keyframes crDash { to { stroke-dashoffset: -24; } }
+.cr-nodes .cr-node {
+  position: absolute; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--c1); transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 0 rgba(30,111,255,.5);
+  animation: crNode 2.8s ease-out infinite;
+}
+.cr-nodes .cr-node--hub { width: 16px; height: 16px; background: var(--c2); }
+@keyframes crNode {
+  0%   { box-shadow: 0 0 0 0 rgba(34,211,238,.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(34,211,238,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
+}
+
+/* ============================================================
+   7 · RADIAL — radiating burst, slow rotate
+   ============================================================ */
+.cr-radial { position: absolute; inset: -25%; display: grid; place-items: center; }
+.cr-radial .cr-burst {
+  width: 100%; height: 100%;
+  background: repeating-conic-gradient(from 0deg,
+      var(--c1) 0deg 1.4deg, transparent 1.4deg 9deg);
+  -webkit-mask: radial-gradient(circle at center, transparent 14%, #000 16%, #000 46%, transparent 64%);
+          mask: radial-gradient(circle at center, transparent 14%, #000 16%, #000 46%, transparent 64%);
+  opacity: .55;
+  animation: crSpin 26s linear infinite;
+}
+.cr-radial .cr-burst--2 {
+  position: absolute; inset: 0;
+  background: repeating-conic-gradient(from 4deg,
+      var(--c2) 0deg .8deg, transparent .8deg 6deg);
+  -webkit-mask: radial-gradient(circle at center, transparent 30%, #000 32%, #000 60%, transparent 74%);
+          mask: radial-gradient(circle at center, transparent 30%, #000 32%, #000 60%, transparent 74%);
+  opacity: .4;
+  animation: crSpinRev 34s linear infinite;
+}
+@keyframes crSpinRev { to { transform: rotate(-360deg); } }
+
+/* ============================================================
+   8 · BARS — marketing growth chart, rises on loop
+   ============================================================ */
+.cr-bars {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end; gap: 4%;
+  padding: 16% 9% 18%;
+}
+.cr-bars .cr-col {
+  flex: 1 1 0; align-self: flex-end; border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg, var(--c2), var(--c1));
+  transform-origin: bottom;
+  animation: crGrow 4.2s cubic-bezier(.5,0,.2,1) infinite;
+}
+@keyframes crGrow {
+  0%       { transform: scaleY(.04); opacity: .5; }
+  22%      { opacity: 1; }
+  60%, 78% { transform: scaleY(1);   opacity: 1; }
+  100%     { transform: scaleY(.04); opacity: .5; }
+}
+.cr-bars .cr-trend {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+}
+.cr-bars .cr-trend path {
+  fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  pathLength: 1;
+  animation: crTrend 4.2s ease-in-out infinite;
+}
+.cr-bars .cr-trend circle { fill: #fff; }
+@keyframes crTrend {
+  0%        { stroke-dashoffset: 1; }
+  45%, 80%  { stroke-dashoffset: 0; }
+  100%      { stroke-dashoffset: 1; }
+}
+
+/* ============================================================
+   9 · ORB — amplifier glow, breathing
+   ============================================================ */
+.cr-orb { position: absolute; inset: 0; display: grid; place-items: center; }
+.cr-orb .cr-orb-core {
+  width: 46%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, var(--c2), var(--c1) 55%, #b8431d 100%);
+  box-shadow: 0 0 70px 12px rgba(30,111,255,.45);
+  animation: crBreathe 4s ease-in-out infinite;
+}
+.cr-orb .cr-orb-halo {
+  position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%;
+  border: 1px solid rgba(34,211,238,.3);
+  animation: crHalo 4s ease-in-out infinite;
+}
+@keyframes crBreathe {
+  0%,100% { transform: scale(.9);  box-shadow: 0 0 50px 6px rgba(30,111,255,.35); }
+  50%     { transform: scale(1.02); box-shadow: 0 0 90px 18px rgba(34,211,238,.6); }
+}
+@keyframes crHalo {
+  0%,100% { transform: scale(.92); opacity: .35; }
+  50%     { transform: scale(1.12); opacity: .7; }
+}
+
+/* ============================================================
+   10 · PULSEGRID — scanning grid / radar field
+   ============================================================ */
+.cr-pulsegrid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--cr-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cr-line) 1px, transparent 1px);
+  background-size: 12% 18%;
+}
+.cr-pulsegrid .cr-beam {
+  position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(34,211,238,.28) 50%, transparent 65%);
+  background-size: 250% 100%;
+  animation: crBeam 5s linear infinite;
+}
+@keyframes crBeam { from { background-position: 150% 0; } to { background-position: -120% 0; } }
+.cr-pulsegrid .cr-blip {
+  position: absolute; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--c2); box-shadow: 0 0 14px 2px var(--c2);
+  animation: crBlip 3s ease-in-out infinite;
+}
+@keyframes crBlip { 0%,100% { opacity: 0; transform: scale(.3); } 45%,55% { opacity: 1; transform: scale(1); } }
+
+/* ============================================================
+   11 · AICORE — generative-engine core broadcasting to AI agents
+   ============================================================ */
+.cr-ai { position: absolute; inset: 0; display: grid; place-items: center; }
+.cr-ai-core {
+  position: relative; z-index: 4; width: 26%; aspect-ratio: 1; border-radius: 30%;
+  background: radial-gradient(circle at 36% 32%, var(--c2), var(--c1) 58%, #b8431d 100%);
+  box-shadow: 0 0 44px 6px rgba(30,111,255,.5);
+  display: grid; place-items: center;
+  animation: crBreathe 3.4s ease-in-out infinite;
+}
+.cr-ai-core svg { width: 52%; height: 52%; color: #fff; filter: drop-shadow(0 1px 3px rgba(0,0,0,.3)); animation: crSpin 12s linear infinite; }
+.cr-ai-emit {
+  position: absolute; z-index: 2; width: 26%; aspect-ratio: 1; border-radius: 50%;
+  border: 2px solid var(--c2);
+  animation: crRing 2.8s cubic-bezier(.2,.6,.2,1) infinite;
+}
+.cr-ai-orbit {
+  position: absolute; z-index: 1; border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,.13);
+  animation-name: crSpin; animation-timing-function: linear; animation-iteration-count: infinite;
+}
+.creative--paper .cr-ai-orbit { border-color: rgba(22,19,15,.12); }
+.cr-ai-agent {
+  position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+  width: 11px; height: 11px; border-radius: 50%; background: var(--c1);
+  box-shadow: 0 0 0 0 rgba(34,211,238,.5);
+  animation: crNode 2.6s ease-out infinite;
+}
+.cr-ai-agent::after {
+  content: ""; position: absolute; inset: -5px; border-radius: 50%;
+  border: 1px solid rgba(34,211,238,.35);
+}
