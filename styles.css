@@ -135,31 +135,24 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   50%      { transform: scale(1.045); box-shadow: 0 16px 44px -8px rgba(34,211,238,.95); }
 }
 
-/* ---------- equalizer logo ---------- */
+/* ---------- logo mark ---------- */
 .logo { display: inline-flex; align-items: center; gap: 16px; }
-/* network-nodes logo mark (Net Leads brand glyph — replaces the Headbanger audio-equalizer) */
+/* Net Leads mark — the "N" that rises into a growth arrow. Colors are baked
+   into each inline SVG (the nav mark adapts its accent dot via currentColor);
+   CSS here only handles sizing and a subtle idle animation. */
 .netmark { width: 38px; height: 38px; display: inline-flex; align-items: center; }
-.netmark svg { width: 100%; height: 100%; }
-.netmark .nm-l { stroke: currentColor; stroke-width: 1.4; opacity: .42; }
-.netmark .nm-c { fill: var(--orange); }
-.netmark .s1   { fill: var(--amber); }
-.netmark .s2   { fill: var(--orange); }
-.netmark .s3   { fill: currentColor; opacity: .78; }
-.netmark .s4   { fill: var(--amber); }
+.netmark svg { width: 100%; height: 100%; overflow: visible; }
 .netmark--lg   { width: 64px; height: 64px; }
-.netmark--lg .nm-l { stroke-width: 2; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .netmark--animate .nm-c { animation: nmpulse 1.6s ease-in-out infinite;       transform-origin: 24px 24px; transform-box: fill-box; }
-  .netmark--animate .s1  { animation: nmpulse 1.6s ease-in-out infinite -.4s;   transform-origin: 8px  11px; transform-box: fill-box; }
-  .netmark--animate .s2  { animation: nmpulse 1.6s ease-in-out infinite -.8s;   transform-origin: 40px 11px; transform-box: fill-box; }
-  .netmark--animate .s3  { animation: nmpulse 1.6s ease-in-out infinite -1.0s;  transform-origin: 7px  38px; transform-box: fill-box; }
-  .netmark--animate .s4  { animation: nmpulse 1.6s ease-in-out infinite -.2s;   transform-origin: 41px 38px; transform-box: fill-box; }
+  .netmark--animate .nl-d1 { animation: nltwinkle 2.4s ease-in-out infinite;      transform-origin: center; transform-box: fill-box; }
+  .netmark--animate .nl-d2 { animation: nltwinkle 2.4s ease-in-out infinite -.8s; transform-origin: center; transform-box: fill-box; }
+  .netmark--animate .nl-d3 { animation: nltwinkle 2.4s ease-in-out infinite -1.6s; transform-origin: center; transform-box: fill-box; }
 }
-/* nodes pulse in opacity + scale — reads as a live network hub */
-@keyframes nmpulse {
-  0%, 100% { opacity: .45; transform: scale(.82); }
-  50%      { opacity: 1;  transform: scale(1.12); }
+/* the three accent dots twinkle in sequence — reads as live, climbing momentum */
+@keyframes nltwinkle {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .5; }
 }
 
 .logo .lockup { display: flex; flex-direction: column; line-height: 1; }

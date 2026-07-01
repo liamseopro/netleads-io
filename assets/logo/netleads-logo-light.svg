@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 128" fill="none" role="img" aria-label="Net Leads">
+  <defs>
+    <linearGradient id="nlg" x1="24" y1="80" x2="60" y2="14" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E6FFF"></stop>
+      <stop offset="1" stop-color="#22D3EE"></stop>
+    </linearGradient>
+    <linearGradient id="div" x1="0" y1="30" x2="0" y2="98" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E6FFF"></stop>
+      <stop offset="1" stop-color="#22D3EE"></stop>
+    </linearGradient>
+    
+  </defs>
+  <g transform="translate(6 16)">
+    <path d="M24 76 V34 L60 70 V16" stroke="url(#nlg)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M50 27 L60 15 L70 27" stroke="#22D3EE" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path>
+    <circle cx="24" cy="76" r="8" fill="#1E6FFF"></circle>
+    <circle cx="24" cy="34" r="8" fill="#22D3EE"></circle>
+    <circle cx="60" cy="70" r="8" fill="#16130F"></circle>
+  </g>
+  <rect x="120" y="30" width="3" height="68" rx="1.5" fill="url(#div)"></rect>
+  <text x="144" y="68" font-family="Archivo, Arial, sans-serif" font-weight="900" font-size="46" letter-spacing="-0.6" fill="#16130F">Net Leads</text>
+  <text x="146" y="92" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="12.5" letter-spacing="3.2" fill="#0F4FC9">RANK HIGHER. GET MORE LEADS.</text>
+</svg>
